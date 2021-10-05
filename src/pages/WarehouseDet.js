@@ -1,20 +1,12 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import { CardContent } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 export default function WarehouseDetail(props) {
   const id = props.match.params.id;
@@ -22,20 +14,20 @@ export default function WarehouseDetail(props) {
     {
       id: 123,
       Active: true,
-      pick: 1,
-      sales: true,
-      Desc: "Warehouse khusus",
-      transfer: true,
-      location: "table 1",
+      PickPriority: 1,
+      SalesAllowed: true,
+      Description: "Warehouse khusus",
+      TransfersAllowed: true,
+      LocationID: "table 1",
     },
     {
       id: 456,
       Active: true,
-      pick: 2,
-      sales: true,
-      Desc: "Text baru",
-      transfer: true,
-      location: "table 1",
+      PickPriority: 2,
+      SalesAllowed: true,
+      Description: "Text baru",
+      TransfersAllowed: true,
+      LocationID: "table 1",
     },
   ];
   const TableColumn = [
@@ -88,39 +80,19 @@ export default function WarehouseDetail(props) {
         </Grid>
       </Toolbar>
       </AppBar>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  {TableColumn.map((column) => (
-                    <TableCell key={column.field}>
-                      {column.headerName}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data !== [] ? data.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    
-                    <TableCell>{row.LocationID}</TableCell>
-                    <TableCell>{row.PickPriority}</TableCell>
-                    
-                    <TableCell>{row.Description}</TableCell>
-                    <TableCell>
-                      {row.SalesAllowed == true ? "True" : "False"}
-                    </TableCell>
-                    <TableCell>
-                      {row.TransfersAllowed == true ? "True" : "False"}
-                    </TableCell>
-                  </TableRow>
-                )) : 
-                ''
-                }
-              </TableBody>
-            </Table>
+        <TableContainer component={Paper}>
+            <div style={{ height: 500, width: "100%" }}>
+              <DataGrid
+                columns={TableColumn}
+                rows={data}
+                getRowId={(row) => row.LocationID}
+                pageSize={15}
+                components={{
+                  Toolbar: GridToolbar,
+                }}
+              />
+              </div>
+        </TableContainer>
       </Paper>
   );
 }
