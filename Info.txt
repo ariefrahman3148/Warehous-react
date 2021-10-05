@@ -1,0 +1,12 @@
+App ini dibuat dengan menggunakan 
+
+
+Cara menjalankan App:
+
+Initial conditions
+-sudah menginstall npm dan node.js
+
+1. Buka command pada folder hasil ekstrak
+2. ketikkan "npm install" untuk mendownload resource
+3. ketikkan "npm start" untuk menjalankan app pada server development 
+4. Server dapat dibuka pada browser dengan alamat http://localhost:3000
