@@ -53,7 +53,7 @@ const datadummy = [
         .get("http://52.163.51.143:40020/api/WarehouseReps")
         .then((response) => {
           console.log(response.data);
-          setdata(response.data);
+          setdata(response.data.filter((i)=>(i.WarehouseID == "RETAIL" || i.WarehouseID == "VA-RETAIL")));
         });
     } catch (e) {
       console.log(e);
@@ -77,6 +77,7 @@ const datadummy = [
               <Typography color="inherit" variant="h5" component="h1">
                 Warehouse
               </Typography>
+              {/* <button onClick={()=>{console.log(data)}}>tes</button> */}
             </Grid>
           </Grid>
         </Toolbar>
